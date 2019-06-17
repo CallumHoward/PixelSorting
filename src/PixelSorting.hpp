@@ -28,8 +28,6 @@ public:
 private:
     void readData();
 
-    int mWidth = 1000;
-    int mHeight = 1000;
     gl::TextureRef mTexture;
     Surface32f mImage;
     Frame mBuffer;
@@ -42,10 +40,17 @@ void PixelSorting::setup() {
         if (not path.empty()) {
             mImage = loadImage(path);
 
-            for (int row = 0; row < mImage.getHeight(); ++row) {
+            auto pixelIterRead = mImage.getIter();
+            auto pixelIterWrite = mImage.getIter();
+            while (pixelIterRead.line() and pixelIterWrite.line()) {
                 auto pixelRow = std::vector<Color>{};
-                for (int col = 0; col < mImage.getWidth(); ++col) {
-                    pixelRow.push_back(mImage.getPixel(ivec2{row, col}));
+                pixelRow.reserve(mImage.getWidth());
+
+                while (pixelIterRead.pixel()) {
+                    pixelRow.emplace_back(
+                            pixelIterRead.r(),
+                            pixelIterRead.g(),
+                            pixelIterRead.b());
                 }
 
                 std::sort(std::begin(pixelRow), std::end(pixelRow),
@@ -53,11 +58,11 @@ void PixelSorting::setup() {
                             return lhs.r < rhs.r;
                         });
 
-                for (int col = 0; col < mImage.getWidth(); ++col) {
-                    mImage.setPixel(ivec2{row, col}, pixelRow[col]);
+                for (int row = 0; row < mImage.getWidth() and pixelIterWrite.pixel(); ++row) {
+                    pixelIterWrite.r() = pixelRow[row].r;
+                    pixelIterWrite.g() = pixelRow[row].g;
+                    pixelIterWrite.b() = pixelRow[row].b;
                 }
-
-                CI_LOG_I("processed row " << row);
             }
 
             mTexture = gl::Texture::create(mImage);
