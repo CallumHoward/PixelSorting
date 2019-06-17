@@ -31,6 +31,7 @@ private:
     int mWidth = 1000;
     int mHeight = 1000;
     gl::TextureRef mTexture;
+    Surface32f mImage;
     Frame mBuffer;
 };
 
@@ -39,7 +40,27 @@ void PixelSorting::setup() {
     try {
         fs::path path = getOpenFilePath("", ImageIo::getLoadExtensions());
         if (not path.empty()) {
-            mTexture = gl::Texture::create(loadImage(path));
+            mImage = loadImage(path);
+
+            for (int row = 0; row < mImage.getHeight(); ++row) {
+                auto pixelRow = std::vector<Color>{};
+                for (int col = 0; col < mImage.getWidth(); ++col) {
+                    pixelRow.push_back(mImage.getPixel(ivec2{row, col}));
+                }
+
+                std::sort(std::begin(pixelRow), std::end(pixelRow),
+                        [] (const Color& lhs, const Color& rhs) {
+                            return lhs.r < rhs.r;
+                        });
+
+                for (int col = 0; col < mImage.getWidth(); ++col) {
+                    mImage.setPixel(ivec2{row, col}, pixelRow[col]);
+                }
+
+                CI_LOG_I("processed row " << row);
+            }
+
+            mTexture = gl::Texture::create(mImage);
         }
 
     } catch (Exception &exc) {

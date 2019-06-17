@@ -48,6 +48,7 @@
 		8D1107320486CEB800E47090 /* PixelSorting.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PixelSorting.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D43E8786EA24E759301E6A6 /* imgui_demo.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = imgui_demo.cpp; path = ../blocks/ImGui/lib/imgui/imgui_demo.cpp; sourceTree = "<group>"; };
 		8E7689C14D74403C83F3142D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		90C25C7522B84C9500BCCD5A /* PixelSorting.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = PixelSorting.hpp; path = ../src/PixelSorting.hpp; sourceTree = "<group>"; };
 		9FDAB2A7B7334D8393AFEC77 /* imgui.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = imgui.h; path = ../blocks/ImGui/lib/imgui/imgui.h; sourceTree = "<group>"; };
 		B87A2020EF4D4EA89474F235 /* imgui_internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = imgui_internal.h; path = ../blocks/ImGui/lib/imgui/imgui_internal.h; sourceTree = "<group>"; };
 		BC57C303B29E4D23AE0E673F /* Resources.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Resources.h; path = ../include/Resources.h; sourceTree = "<group>"; };
@@ -89,6 +90,7 @@
 		080E96DDFE201D6D7F000001 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				90C25C7522B84C9500BCCD5A /* PixelSorting.hpp */,
 				D7999198F39F43DB8AD5EC68 /* PixelSortingApp.cpp */,
 			);
 			name = Source;
