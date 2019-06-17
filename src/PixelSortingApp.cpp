@@ -7,28 +7,21 @@ using namespace ci::app;
 using namespace std;
 
 class PixelSortingApp : public App {
-  public:
-	void setup() override;
-	void mouseDown( MouseEvent event ) override;
-	void update() override;
-	void draw() override;
+public:
+    void setup() override;
+    void mouseDown(MouseEvent event) override;
+    void update() override;
+    void draw() override;
 };
 
-void PixelSortingApp::setup()
-{
+void PixelSortingApp::setup() {}
+
+void PixelSortingApp::mouseDown(MouseEvent event) {}
+
+void PixelSortingApp::update() {}
+
+void PixelSortingApp::draw() {
+    gl::clear(Color(0, 0, 0));
 }
 
-void PixelSortingApp::mouseDown( MouseEvent event )
-{
-}
-
-void PixelSortingApp::update()
-{
-}
-
-void PixelSortingApp::draw()
-{
-	gl::clear( Color( 0, 0, 0 ) ); 
-}
-
-CINDER_APP( PixelSortingApp, RendererGl )
+CINDER_APP(PixelSortingApp, RendererGl)
